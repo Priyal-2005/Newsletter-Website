@@ -80,18 +80,12 @@ newsSearch.addEventListener("input", event => {
     const inputSearchValue = event.target.value;
     contentWrapper.innerHTML = ""; // Clear previous news
 
-    if (inputSearchValue === "") {
-        getNews().then(data => renderNews(data.articles));
-    } else {
-        getSearchNews(inputSearchValue).then(data => {
-            if (!data.articles || data.articles.length === 0) {
-                showMessage("No results found");
-                return;
-            }
-            renderNews(data.articles);
-        }).catch(error => {
-            console.log(error);
-            showMessage("Failed to load news. Please try again.");
-        });
+    if (inputSearchValue == ""){
+        getNews().then(data =>
+            renderNews(data.articles))
+    }
+    else{
+        getSearchNews(inputSearchValue).then(
+            data => renderNews(data.articles))
     }
 });
