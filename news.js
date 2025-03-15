@@ -65,7 +65,7 @@ function renderNews(newsData) {
 async function getSearchNews(query){
     showMessage("Loading...");
     try{
-        const getNewsDataApi = await fetch (`${baseUrl}everything?q=${query}/&apiKey=${apiKey}`)
+        const getNewsDataApi = await fetch (`${baseUrl}/everything?q=${query}/&apiKey=${apiKey}`)
         const data = await getNewsDataApi.json()
         return data;
     }
@@ -78,12 +78,20 @@ async function getSearchNews(query){
 // Event listener for searching news
 newsSearch.addEventListener("input", event => {
     const inputSearchValue = event.target.value;
-    contentWrapper.innerHTML = ""
-    if (inputSearchValue == ""){
+    contentWrapper.innerHTML = ""; // Clear previous news
+
+    if (inputSearchValue === "") {
         getNews().then(data => renderNews(data.articles));
-    }
-    else{
-        getSearchNews(inputSearchValue).then(
-            data => renderNews(data.articles))
+    } else {
+        getSearchNews(inputSearchValue).then(data => {
+            if (!data.articles || data.articles.length === 0) {
+                showMessage("No results found");
+                return;
+            }
+            renderNews(data.articles);
+        }).catch(error => {
+            console.log(error);
+            showMessage("Failed to load news. Please try again.");
+        });
     }
 });
