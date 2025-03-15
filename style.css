@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+:root{
+    --primary-color: #007aff;
+    --secondary-color: #2e92ff;
+}
+
+.header{
+    background: linear-gradient(to right, var(--primary-color),var(--secondary-color));
+    color: white;
+    padding: 1rem;
+    min-height: 80px;
+    display: flex;
+    justify-content: center;
+}
+
+.header::before{
+    content: "";
+    width: 100%;
+    height: 300px;
+    position: absolute;
+    left: 0;
+    top: 80px;
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    z-index: -1;
+}
+
+.header-wrapper{
+    width: 100%;
+    max-width: 70rem;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.news-search-input{
+    background: rgba(255,255,255,0.1);
+    border: none;
+    padding: 10px 12px;
+    border-radius: 6px;
+    width: 12rem;
+    outline: none;
+    color: white;
+}
+
+.news-search-input::placeholder{
+    color: rgba(255,255,255,0.75);
+}
+
+.content{
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.content-wrapper{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 70rem;
+    gap: 1.5rem;
+}
+
+.card{
+    background: white;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.card-image-wrapper{
+    height: 250px;
+    overflow: hidden;
+}
+
+.card-image-wrapper img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.3s ease;
+}
+
+.card-image-wrapper img:hover{
+    transform: scale(1.1);
+}
+
+.card-content{
+    padding: 0.8rem;
+}
+
+.card-date .card-description{
+    color: #7f7f7f;
+}
+
+.card-title a{
+    color: black;
+    text-decoration: none;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.card-title a:hover{
+    text-align: underline;
+}
+
+.card-description{
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+@media screen and (max-width: 1000px) {
+    .content-wrapper{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .content-wrapper{
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
