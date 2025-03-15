@@ -3,9 +3,12 @@ const baseUrl = `https://newsapi.org/v2`
 
 const contentWrapper = document.getElementById("contentWrapper");
 const newsSearch = document.getElementById("newsSearchInput");
+const messageText = document.getElementById("messageText");
 
 
 async function getNews(){
+    // When news is loading, show the message
+    showMessage("Loading...");
     try{
         const getNewsDataApi = await fetch (`${baseUrl}/top-headlines?country=us&apiKey=${apiKey}`)
         const data = await getNewsDataApi.json()
@@ -17,6 +20,11 @@ async function getNews(){
 }
 
 getNews().then(data => renderNews(data.articles));
+
+function showMessage(message) {
+    messageText.style.display = "flex";
+    messageText.textContent = message;
+}
 
 function renderNews(newsData) {
     newsData.forEach(news => {
@@ -48,10 +56,14 @@ function renderNews(newsData) {
         // Append the card to the content wrapper
         contentWrapper.insertAdjacentHTML('beforeend', card)
     });
+
+    // Remove the message when the news has loaded 
+    messageText.style.display = "none";
 }
 
 
 async function getSearchNews(query){
+    showMessage("Loading...");
     try{
         const getNewsDataApi = await fetch (`${baseUrl}everything?q=${query}/&apiKey=${apiKey}`)
         const data = await getNewsDataApi.json()
